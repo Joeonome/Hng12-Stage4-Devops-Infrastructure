@@ -12,15 +12,17 @@ resource "aws_instance" "todo_server" {
     #!/bin/bash
     sleep 30  # Ensure the instance is fully initialized
     apt update -y
+    apt upgrade -y
     apt install -y software-properties-common
     add-apt-repository --yes --update ppa:ansible/ansible
+    sudo apt autoremove -y && sudo apt clean
     apt install -y ansible docker.io git
     systemctl start docker
     systemctl enable docker
     usermod -aG docker ubuntu
     curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
-    sudo docker network create app_network
+    docker network create app_network
   EOF
 
   provisioner "remote-exec" {

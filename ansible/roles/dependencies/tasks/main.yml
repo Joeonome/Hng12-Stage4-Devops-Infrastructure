@@ -2,8 +2,6 @@
 - name: Install required packages
   apt:
     name:
-      - docker.io
-      - git
       - python3-pip
     state: present
     update_cache: yes
