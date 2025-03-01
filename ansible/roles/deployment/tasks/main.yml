@@ -1,0 +1,13 @@
+---
+- name: Clone the TODO application repository
+  git:
+    repo: "https://github.com/Joeonome/hng12-stage4-DevOps-Stage-4"
+    dest: "/home/ubuntu/todo-app"
+    version: main
+  become: yes
+
+- name: Run the application with Docker Compose
+  shell: |
+    cd /home/ubuntu/todo-app
+    docker-compose up -d
+  become: yes
